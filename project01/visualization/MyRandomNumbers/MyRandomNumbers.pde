@@ -9,6 +9,9 @@ SimpleSpreadsheetManager sm;
 String sUrl = "t6mq_WLV5c5uj6mUNSryBIA";
 String googleUser = GUSER;
 String googlePass = GPASS;
+
+//This is the font object
+PFont label;
   
 void setup() {
     //This code happens once, right when our sketch is launched
@@ -78,9 +81,10 @@ void setup() {
    }
 */
 
-  //colorGrid(numbers, 50, 50, 70);
   
-  colorGrid(numbers, 50, 50, 70);
+  label = createFont("Helvetica", 24);
+  colorGridLabel(numbers, 50, 50, 70);
+  //colorGrid(numbers, 50, 50, 70);
 
 }
 
@@ -132,6 +136,33 @@ void colorGrid(int[] nums, float x, float y, float s) {
 }
 
 
+
+void colorGridLabel(int[] nums, float x, float y, float s) {
+ //Make a list of number counts
+ int[] counts = new int[100];
+ //Fill it with zeros
+ for (int i = 0; i < 100; i++) {
+   counts[i] = 0;
+ }
+ //Tally the counts
+ for (int i = 0; i < nums.length; i++) {
+   counts[nums[i]] ++;
+ }
+ 
+ pushMatrix();
+ translate(x,y);
+ //Draw the grid
+ for (int i = 0; i < counts.length; i++) {
+   colorMode(HSB);
+   fill(counts[i] * 30, 255, 255, counts[i] * 30);
+   textAlign(CENTER);
+   textFont(label);
+   textSize(s/2);
+   text(i, (i % 10) * s  , floor(i/10) * s );
+   //rect((i%10)*s,floor(i/10)*s, s, s); 
+ }
+ popMatrix();
+}
 
 
 void draw() {
