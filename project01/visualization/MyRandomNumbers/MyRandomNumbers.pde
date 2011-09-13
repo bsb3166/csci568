@@ -25,6 +25,46 @@ void setup() {
     for (int i =0; i < numbers.length; i++) {
       ellipse(numbers[i] * 8, height/2, 8, 8);
     }
+    //A line of random numbers
+    for (int i =0; i < numbers.length; i++) {
+      ellipse(ceil(random(0,99)) * 8, height/2 + 10, 8, 8);
+    }
+    //A line of random numbers
+    for (int i =0; i < numbers.length; i++) {
+      ellipse(ceil(random(0,99)) * 8, height/2 + 20, 8, 8);
+    }
+    //A line of random numbers
+    for (int i =0; i < numbers.length; i++) {
+      ellipse(ceil(random(0,99)) * 8, height/2 + 30, 8, 8);
+    }
+    //A line of random numbers
+    for (int i =0; i < numbers.length; i++) {
+      ellipse(ceil(random(0,99)) * 8, height/2 + 40, 8, 8);
+    }
+    //A line of random numbers
+    for (int i =0; i < numbers.length; i++) {
+      ellipse(ceil(random(0,99)) * 8, height/2 + 50, 8, 8);
+    }
+    //A line of random numbers
+    for (int i =0; i < numbers.length; i++) {
+      ellipse(ceil(random(0,99)) * 8, height/2 + 60, 8, 8);
+    }
+    //A line of random numbers
+    for (int i =0; i < numbers.length; i++) {
+      ellipse(ceil(random(0,99)) * 8, height/2 + 70, 8, 8);
+    }
+    //A line of random numbers
+    for (int i =0; i < numbers.length; i++) {
+      ellipse(ceil(random(0,99)) * 8, height/2 + 80, 8, 8);
+    }
+    //A line of random numbers
+    for (int i =0; i < numbers.length; i++) {
+      ellipse(ceil(random(0,99)) * 8, height/2 + 90, 8, 8);
+    }
+    //A line of random numbers
+    for (int i =0; i < numbers.length; i++) {
+      ellipse(ceil(random(0,99)) * 8, height/2 + 100, 8, 8);
+    }
 }
 
 void draw() {
