@@ -164,7 +164,6 @@ void colorGridLabel(int[] nums, float x, float y, float s) {
  popMatrix();
 }
 
-
 void draw() {
   //This code happens once every frame.
 }
