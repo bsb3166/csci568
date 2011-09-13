@@ -70,7 +70,10 @@ void setup() {
 */
    barGraph(numbers, 400);
    
-
+   for (int i =1; i < 7; i++) {
+     int[] randoms = getRandomNumbers(255);
+     barGraph(randoms, 100 + (i * 130));
+   }
 
 }
 
@@ -88,9 +91,9 @@ void barGraph( int[] nums, float y ) {
   
  //Draw the bar graph
  for (int i = 0; i < counts.length; i++) {
-   //colorMode(HSB);
-   //fill(counts[i] * 30, 255, 255);
-   fill(255, counts[i] * 30, 0);
+   colorMode(HSB);
+   fill(counts[i] * 30, 255, 255);
+   //fill(255, counts[i] * 30, 0);
    rect(i * 8, y, 8, -counts[i] * 10);
  }  
 }
