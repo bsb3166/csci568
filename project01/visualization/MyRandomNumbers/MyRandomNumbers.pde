@@ -18,6 +18,13 @@ void setup() {
 
     //Ask for the list of numbers
     int[] numbers = getNumbers();
+    
+    //draw
+    fill(255,40);
+    noStroke();
+    for (int i =0; i < numbers.length; i++) {
+      ellipse(numbers[i] * 8, height/2, 8, 8);
+    }
 }
 
 void draw() {
