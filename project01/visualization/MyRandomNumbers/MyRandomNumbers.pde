@@ -16,6 +16,8 @@ void setup() {
     background(0);
     smooth();
 
+    //Ask for the list of numbers
+    int[] numbers = getNumbers();
 }
 
 void draw() {
