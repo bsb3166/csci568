@@ -135,8 +135,6 @@ void colorGrid(int[] nums, float x, float y, float s) {
  popMatrix();
 }
 
-
-
 void colorGridLabel(int[] nums, float x, float y, float s) {
  //Make a list of number counts
  int[] counts = new int[100];
@@ -158,8 +156,10 @@ void colorGridLabel(int[] nums, float x, float y, float s) {
    textAlign(CENTER);
    textFont(label);
    textSize(s/2);
-   text(i, (i % 10) * s  , floor(i/10) * s );
-   //rect((i%10)*s,floor(i/10)*s, s, s); 
+   text(i, (i % 10) * s + 30 , floor(i/10) * s + 50);
+   rect((i%10)*s,floor(i/10)*s, s, s);
+   
+  
  }
  popMatrix();
 }
