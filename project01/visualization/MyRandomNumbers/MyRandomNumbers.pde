@@ -68,12 +68,19 @@ void setup() {
       ellipse(ceil(random(0,99)) * 8, height/2 + 100, 8, 8);
     }
 */
+
+/*
    barGraph(numbers, 400);
    
    for (int i =1; i < 7; i++) {
      int[] randoms = getRandomNumbers(255);
      barGraph(randoms, 100 + (i * 130));
    }
+*/
+
+  //colorGrid(numbers, 50, 50, 70);
+  
+  colorGrid(numbers, 50, 50, 70);
 
 }
 
@@ -97,6 +104,35 @@ void barGraph( int[] nums, float y ) {
    rect(i * 8, y, 8, -counts[i] * 10);
  }  
 }
+
+
+void colorGrid(int[] nums, float x, float y, float s) {
+ //Make a list of number counts
+ int[] counts = new int[100];
+ //Fill it with zeros
+ for (int i = 0; i < 100; i++) {
+   counts[i] = 0;
+ }
+ //Tally the counts
+ for (int i = 0; i < nums.length; i++) {
+   counts[nums[i]] ++;
+ }
+ 
+ pushMatrix();
+ translate(x,y);
+ //Draw the grid
+ for (int i = 0; i < counts.length; i++) {
+   colorMode(HSB);
+   fill(counts[i] * 30, 255, 255, counts[i] * 30);
+   rect((i%10)*s,floor(i/10)*s, s, s);
+   
+  
+ }
+ popMatrix();
+}
+
+
+
 
 void draw() {
   //This code happens once every frame.
