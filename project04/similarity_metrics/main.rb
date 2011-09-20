@@ -49,3 +49,5 @@ binaryset.each do |key, value|
   puts "#{key}: #{jaccardSimilarity(value, sample_binary['john'])}"
 end
 puts "--------------^_^------------------"
+puts "--------------END------------------"
+
