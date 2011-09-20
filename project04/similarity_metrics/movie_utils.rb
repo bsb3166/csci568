@@ -58,3 +58,45 @@ def cosineSimilarity(a,b)
   b_norm = Math.sqrt(b_norm)
   cosineSimilarity = a_dot_b / (a_norm * b_norm)
 end
+
+def pearsonCorrelationCoeff(a,b)
+  common_film_names = a.keys & b.keys
+  if common_film_names.empty?
+    return 0
+  end
+  
+  sum_a = 0
+  sum_b = 0
+  square_sum1 = 0
+  square_sum2 = 0
+  product = 0
+  numerator = 0
+  denominator = 0
+  result = 0
+  n = common_film_names.length
+  
+  common_film_names.each do |film_name| 
+    # Summation over all attributes for both objects
+    sum_a += a[film_name]
+  	sum_b += b[film_name]
+    # Sum the squares
+  	square_sum1 += a[film_name]**2
+  	square_sum2 += b[film_name]**2
+    # Add up the products
+  	product += a[film_name] * b[film_name]
+  end
+
+  #Calculate Pearson Correlation score
+  numerator = product - (sum_a*sum_b/n)
+  denominator = Math.sqrt((square_sum1 - (sum_a**2)/n) * (square_sum2 - (sum_b**2)/n))
+      
+  # Can"t have division by 0
+  if denominator == 0
+      return 0
+  end
+  
+  result = numerator/denominator
+  return result
+end
+
+

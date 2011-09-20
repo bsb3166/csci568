@@ -23,3 +23,9 @@ ratingset.each do |key, value|
   puts "#{key}: #{cosineSimilarity(value, sample_ratings['john'])}"
 end
 puts "--------------^_^------------------" 
+
+puts "PearsonCorrelationCoeff:"
+ratingset.each do |key, value|
+  puts "#{key}: #{pearsonCorrelationCoeff(value, sample_ratings['john'])}"
+end
+puts "--------------^_^------------------"
