@@ -29,3 +29,23 @@ ratingset.each do |key, value|
   puts "#{key}: #{pearsonCorrelationCoeff(value, sample_ratings['john'])}"
 end
 puts "--------------^_^------------------"
+
+binaryset = generate_binaryset(ratingset, MOVIES)
+
+#print_binary(binaryset)
+
+sample_binary = generate_binaryset(sample_ratings, MOVIES)
+
+#print_ratings(johns_ratings)
+
+puts "SMC:"
+binaryset.each do |key, value|
+  puts "#{key}: #{smc(value, sample_binary['john'])}"
+end
+puts "--------------^_^------------------"
+
+puts "JaccardSimilarity:"
+binaryset.each do |key, value|
+  puts "#{key}: #{jaccardSimilarity(value, sample_binary['john'])}"
+end
+puts "--------------^_^------------------"

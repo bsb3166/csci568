@@ -121,3 +121,34 @@ def generate_binaryset(ratingset, movies)
   end
 end
 
+def smc(a,b)
+
+  numerator = 0.0
+  denominator = a.length
+  smc = 0.0
+  
+  a.each do |flick, match|
+  	if  a[flick] == b[flick] 
+  	  numerator += 1
+    end
+  end 
+  smc =  numerator/denominator  
+end
+
+
+def jaccardSimilarity(a,b)
+
+  numerator = 0.0
+  denominator = a.length
+  jaccardSimilarity = 0.0
+ 
+  a.each do |flick, match|
+  	if  a[flick] && b[flick]
+  	  numerator += 1
+    elsif  !a[flick] && !b[flick]
+  	  denominator -= 1
+    end 
+  end 
+  jaccardSimilarity =  numerator/denominator  
+end
+
