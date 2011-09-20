@@ -38,3 +38,23 @@ def euclideanDistance(a, b)
   euclideanDistance = Math.sqrt(euclideanDistance)
 end
 
+def cosineSimilarity(a,b)
+  common_film_names = a.keys & b.keys
+  if common_film_names.empty?
+    return 0
+  end
+  cosineSimilarity = 0.0
+  a_dot_b = 0.0
+  a_norm = 0.0
+  b_norm = 0.0
+  common_film_names.each do |film_name|
+    a_rating = a[film_name]
+    b_rating = b[film_name]
+    a_dot_b += (a_rating * b_rating)
+    a_norm += a_rating**2
+    b_norm += b_rating**2
+  end
+  a_norm = Math.sqrt(a_norm)
+  b_norm = Math.sqrt(b_norm)
+  cosineSimilarity = a_dot_b / (a_norm * b_norm)
+end

@@ -18,3 +18,8 @@ ratingset.each do |key, value|
 end
 puts "--------------^_^------------------"
 
+puts "CosineSimilarity:"
+ratingset.each do |key, value|
+  puts "#{key}: #{cosineSimilarity(value, sample_ratings['john'])}"
+end
+puts "--------------^_^------------------" 
