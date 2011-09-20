@@ -99,4 +99,25 @@ def pearsonCorrelationCoeff(a,b)
   return result
 end
 
+def print_binary(binaryset)
+  binaryset.each do |person, binary|
+    puts person
+    binary.each do |flick, match|
+      puts "\t#{match} #{flick}"
+    end
+  end
+end
+
+
+def generate_binaryset(ratingset, movies)
+  {}.tap do |binaryset|
+    ratingset.each do |person, ratings|
+      binaryset[person] = {}.tap do |binary|
+        movies.each do |film_name|
+          binary[film_name] = ratings.has_key?(film_name)
+        end
+      end
+    end
+  end
+end
 
