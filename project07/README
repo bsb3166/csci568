@@ -1,0 +1,2 @@
+run: ruby main.rb
+It'll show the final trained output
