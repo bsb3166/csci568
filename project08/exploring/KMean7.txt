@@ -1,0 +1,81 @@
+=== Run information ===
+
+Scheme:weka.clusterers.SimpleKMeans -N 7 -A "weka.core.EuclideanDistance -R first-last" -I 500 -S 10
+Relation:     mushroom
+Instances:8124
+Attributes:23
+              class
+              cap-shape
+              cap-surface
+              cap-color
+              bruises?
+              odor
+              gill-attachment
+              gill-spacing
+              gill-size
+              gill-color
+              stalk-shape
+              stalk-root
+              stalk-surface-above-ring
+              stalk-surface-below-ring
+              stalk-color-above-ring
+              stalk-color-below-ring
+              veil-type
+              veil-color
+              ring-number
+              ring-type
+              spore-print-color
+              population
+              habitat
+Test mode:evaluate on training data
+
+=== Model and evaluation on training set ===
+
+
+kMeans
+======
+
+Number of iterations: 6
+Within cluster sum of squared errors: 43513.0
+Missing values globally replaced with mean/mode
+
+Cluster centroids:
+                                        Cluster#
+Attribute                   Full Data          0          1          2          3          4          5          6
+                               (8124)     (1968)      (804)      (193)     (1326)      (972)     (1812)     (1049)
+==================================================================================================================
+class                               e          e          e          e          p          e          p          e
+cap-shape                           x          f          x          b          x          x          k          x
+cap-surface                         y          f          y          s          f          y          y          s
+cap-color                           n          n          n          n          g          w          n          g
+bruises?                            f          t          t          f          f          t          f          f
+odor                                n          n          n          n          f          a          f          n
+gill-attachment                     f          f          f          a          f          f          f          f
+gill-spacing                        c          c          c          c          c          c          c          w
+gill-size                           b          b          b          b          b          b          n          b
+gill-color                          b          w          w          n          p          n          b          p
+stalk-shape                         t          t          t          e          e          e          t          t
+stalk-root                          b          b          b          b          b          c          b          e
+stalk-surface-above-ring            s          s          s          s          k          s          k          s
+stalk-surface-below-ring            s          s          s          s          k          s          s          s
+stalk-color-above-ring              w          w          w          o          b          w          w          w
+stalk-color-below-ring              w          w          g          o          b          w          p          w
+veil-type                           p          p          p          p          p          p          p          p
+veil-color                          w          w          w          n          w          w          w          w
+ring-number                         o          o          o          o          o          o          o          o
+ring-type                           p          p          p          p          l          p          e          e
+spore-print-color                   w          n          k          b          h          n          w          k
+population                          v          v          v          c          v          s          v          s
+habitat                             d          d          d          l          g          g          d          g
+
+
+Clustered Instances
+
+0      1968 ( 24%)
+1       804 ( 10%)
+2       193 (  2%)
+3      1326 ( 16%)
+4       972 ( 12%)
+5      1812 ( 22%)
+6      1049 ( 13%)
+

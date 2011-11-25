@@ -1,0 +1,25 @@
+% Title: Mushroom Database
+@attribute 'class' { 'e', 'p'}
+@attribute 'cap-shape' { 'b', 'c', 'f', 'k', 's', 'x'}
+@attribute 'cap-surface' { 'f', 'g', 's', 'y'}
+@attribute 'cap-color' { 'b', 'c', 'e', 'g', 'n', 'p', 'r', 'u', 'w', 'y'}
+@attribute 'bruises?' { 'f', 't'}
+@attribute 'odor' { 'a', 'c', 'f', 'l', 'm', 'n', 'p', 's', 'y'}
+@attribute 'gill-attachment' { 'a', 'd', 'f', 'n'}
+@attribute 'gill-spacing' { 'c', 'd', 'w'}
+@attribute 'gill-size' { 'b', 'n'}
+@attribute 'gill-color' { 'b', 'e', 'g', 'h', 'k', 'n', 'o', 'p', 'r', 'u', 'w', 'y'}
+@attribute 'stalk-shape' { 'e', 't'}
+@attribute 'stalk-root' { 'b', 'c', 'e', 'r', 'u', 'z'}
+@attribute 'stalk-surface-above-ring' { 'f', 'k', 's', 'y'}
+@attribute 'stalk-surface-below-ring' { 'f', 'k', 's', 'y'}
+@attribute 'stalk-color-above-ring' { 'b', 'c', 'e', 'g', 'n', 'o', 'p', 'w', 'y'}
+@attribute 'stalk-color-below-ring' { 'b', 'c', 'e', 'g', 'n', 'o', 'p', 'w', 'y'}
+@attribute 'veil-type' { 'p', 'u'}
+@attribute 'veil-color' { 'n', 'o', 'w', 'y'}
+@attribute 'ring-number' { 'n', 'o', 't'}
+@attribute 'ring-type' { 'c', 'e', 'f', 'l', 'n', 'p', 's', 'z'}
+@attribute 'spore-print-color' { 'b', 'h', 'k', 'n', 'o', 'r', 'u', 'w', 'y'}
+@attribute 'population' { 'a', 'c', 'n', 's', 'v', 'y'}
+@attribute 'habitat' { 'd', 'g', 'l', 'm', 'p', 'u', 'w'}
+@data

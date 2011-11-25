@@ -1,0 +1,62 @@
+=== Run information ===
+
+Scheme:weka.classifiers.rules.ZeroR 
+Relation: mushroom
+Instances:8124
+Attributes:23
+              class
+              cap-shape
+              cap-surface
+              cap-color
+              bruises?
+              odor
+              gill-attachment
+              gill-spacing
+              gill-size
+              gill-color
+              stalk-shape
+              stalk-root
+              stalk-surface-above-ring
+              stalk-surface-below-ring
+              stalk-color-above-ring
+              stalk-color-below-ring
+              veil-type
+              veil-color
+              ring-number
+              ring-type
+              spore-print-color
+              population
+              habitat
+Test mode:10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+ZeroR predicts class value: e
+
+Time taken to build model: 0.03seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances        4208               51.7971 %
+Incorrectly Classified Instances      3916               48.2029 %
+Kappa statistic                          0     
+Mean absolute error                      0.4994
+Root mean squared error                  0.4997
+Relative absolute error                100      %
+Root relative squared error            100      %
+Total Number of Instances             8124     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 1         1          0.518     1         0.682      0.5      e
+                 0         0          0         0         0          0.5      p
+Weighted Avg.    0.518     0.518      0.268     0.518     0.353      0.5  
+
+=== Confusion Matrix ===
+
+    a    b   <-- classified as
+ 4208    0 |    a = e
+ 3916    0 |    b = p
+

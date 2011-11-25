@@ -1,0 +1,100 @@
+=== Run information ===
+
+Scheme:weka.classifiers.rules.PART -M 2 -C 0.25 -Q 1
+Relation: mushroom
+Instances:8124
+Attributes:23
+              class
+              cap-shape
+              cap-surface
+              cap-color
+              bruises?
+              odor
+              gill-attachment
+              gill-spacing
+              gill-size
+              gill-color
+              stalk-shape
+              stalk-root
+              stalk-surface-above-ring
+              stalk-surface-below-ring
+              stalk-color-above-ring
+              stalk-color-below-ring
+              veil-type
+              veil-color
+              ring-number
+              ring-type
+              spore-print-color
+              population
+              habitat
+Test mode:10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+PART decision list
+------------------
+
+odor = f: p (2160.0)
+
+gill-size = b AND
+ring-number = o: e (3392.0)
+
+ring-number = t AND
+spore-print-color = w: e (528.0)
+
+odor = s: p (576.0)
+
+odor = y: p (576.0)
+
+stalk-shape = e AND
+stalk-surface-below-ring = s AND
+odor = p: p (256.0)
+
+stalk-shape = e AND
+odor = c: p (192.0)
+
+gill-size = n AND
+stalk-surface-above-ring = s AND
+population = v: e (192.0)
+
+gill-size = b: p (108.0)
+
+stalk-surface-below-ring = s AND
+bruises? = f: e (60.0)
+
+stalk-surface-below-ring = y: p (40.0)
+
+bruises? = f: e (36.0)
+
+: p (8.0)
+
+Number of Rules  : 	13
+
+
+Time taken to build model: 0.2seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances        8124              100      %
+Incorrectly Classified Instances         0                0      %
+Kappa statistic                          1     
+Mean absolute error                      0     
+Root mean squared error                  0     
+Relative absolute error                  0      %
+Root relative squared error              0      %
+Total Number of Instances             8124     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 1         0          1         1         1          1        e
+                 1         0          1         1         1          1        p
+Weighted Avg.    1         0          1         1         1          1    
+
+=== Confusion Matrix ===
+
+    a    b   <-- classified as
+ 4208    0 |    a = e
+    0 3916 |    b = p
+

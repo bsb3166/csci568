@@ -1,0 +1,77 @@
+=== Run information ===
+
+Scheme:weka.clusterers.SimpleKMeans -N 3 -A "weka.core.EuclideanDistance -R first-last" -I 500 -S 10
+Relation:     mushroom
+Instances:8124
+Attributes:23
+              class
+              cap-shape
+              cap-surface
+              cap-color
+              bruises?
+              odor
+              gill-attachment
+              gill-spacing
+              gill-size
+              gill-color
+              stalk-shape
+              stalk-root
+              stalk-surface-above-ring
+              stalk-surface-below-ring
+              stalk-color-above-ring
+              stalk-color-below-ring
+              veil-type
+              veil-color
+              ring-number
+              ring-type
+              spore-print-color
+              population
+              habitat
+Test mode:evaluate on training data
+
+=== Model and evaluation on training set ===
+
+
+kMeans
+======
+
+Number of iterations: 8
+Within cluster sum of squared errors: 59801.0
+Missing values globally replaced with mean/mode
+
+Cluster centroids:
+                                        Cluster#
+Attribute                   Full Data          0          1          2
+                               (8124)     (3124)     (4795)      (205)
+======================================================================
+class                               e          p          e          e
+cap-shape                           x          f          x          f
+cap-surface                         y          y          y          s
+cap-color                           n          n          g          n
+bruises?                            f          f          t          f
+odor                                n          f          n          n
+gill-attachment                     f          f          f          a
+gill-spacing                        c          c          c          c
+gill-size                           b          n          b          b
+gill-color                          b          b          w          n
+stalk-shape                         t          t          t          e
+stalk-root                          b          b          b          b
+stalk-surface-above-ring            s          k          s          s
+stalk-surface-below-ring            s          k          s          s
+stalk-color-above-ring              w          p          w          o
+stalk-color-below-ring              w          p          w          o
+veil-type                           p          p          p          p
+veil-color                          w          w          w          n
+ring-number                         o          o          o          o
+ring-type                           p          e          p          p
+spore-print-color                   w          w          n          b
+population                          v          v          v          c
+habitat                             d          d          d          l
+
+
+Clustered Instances
+
+0      3124 ( 38%)
+1      4795 ( 59%)
+2       205 (  3%)
+

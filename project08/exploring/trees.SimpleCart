@@ -1,0 +1,79 @@
+=== Run information ===
+
+Scheme:weka.classifiers.trees.SimpleCart -S 1 -M 2.0 -N 5 -C 1.0
+Relation: mushroom
+Instances:8124
+Attributes:23
+              class
+              cap-shape
+              cap-surface
+              cap-color
+              bruises?
+              odor
+              gill-attachment
+              gill-spacing
+              gill-size
+              gill-color
+              stalk-shape
+              stalk-root
+              stalk-surface-above-ring
+              stalk-surface-below-ring
+              stalk-color-above-ring
+              stalk-color-below-ring
+              veil-type
+              veil-color
+              ring-number
+              ring-type
+              spore-print-color
+              population
+              habitat
+Test mode:10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+CART Decision Tree
+
+odor=(c)|(f)|(m)|(p)|(s)|(y): p(3796.0/0.0)
+odor!=(c)|(f)|(m)|(p)|(s)|(y)
+|  spore-print-color=(r): p(72.0/0.0)
+|  spore-print-color!=(r)
+|  |  stalk-color-below-ring=(y): p(24.0/0.0)
+|  |  stalk-color-below-ring!=(y)
+|  |  |  cap-surface=(g): p(4.0/0.0)
+|  |  |  cap-surface!=(g)
+|  |  |  |  stalk-color-below-ring=(n)
+|  |  |  |  |  stalk-surface-above-ring=(k): p(16.0/0.0)
+|  |  |  |  |  stalk-surface-above-ring!=(k): e(64.0/0.0)
+|  |  |  |  stalk-color-below-ring!=(n): e(4144.0/4.0)
+
+Number of Leaf Nodes: 7
+
+Size of the Tree: 13
+
+Time taken to build model: 5.86seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances        8119               99.9385 %
+Incorrectly Classified Instances         5                0.0615 %
+Kappa statistic                          0.9988
+Mean absolute error                      0.0011
+Root mean squared error                  0.0248
+Relative absolute error                  0.2134 %
+Root relative squared error              4.9622 %
+Total Number of Instances             8124     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 1         0.001      0.999     1         0.999      0.999    e
+                 0.999     0          1         0.999     0.999      0.999    p
+Weighted Avg.    0.999     0.001      0.999     0.999     0.999      0.999
+
+=== Confusion Matrix ===
+
+    a    b   <-- classified as
+ 4208    0 |    a = e
+    5 3911 |    b = p
+
