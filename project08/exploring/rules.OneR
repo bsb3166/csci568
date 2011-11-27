@@ -1,0 +1,73 @@
+=== Run information ===
+
+Scheme:weka.classifiers.rules.OneR -B 6
+Relation: mushroom
+Instances:8124
+Attributes:23
+              class
+              cap-shape
+              cap-surface
+              cap-color
+              bruises?
+              odor
+              gill-attachment
+              gill-spacing
+              gill-size
+              gill-color
+              stalk-shape
+              stalk-root
+              stalk-surface-above-ring
+              stalk-surface-below-ring
+              stalk-color-above-ring
+              stalk-color-below-ring
+              veil-type
+              veil-color
+              ring-number
+              ring-type
+              spore-print-color
+              population
+              habitat
+Test mode:evaluate on training data
+
+=== Classifier model (full training set) ===
+
+odor:
+	a	-> e
+	c	-> p
+	f	-> p
+	l	-> e
+	m	-> p
+	n	-> e
+	p	-> p
+	s	-> p
+	y	-> p
+(8004/8124 instances correct)
+
+
+Time taken to build model: 0.02seconds
+
+=== Evaluation on training set ===
+=== Summary ===
+
+Correctly Classified Instances        8004               98.5229 %
+Incorrectly Classified Instances       120                1.4771 %
+Kappa statistic                          0.9704
+Mean absolute error                      0.0148
+Root mean squared error                  0.1215
+Relative absolute error                  2.958  %
+Root relative squared error             24.323  %
+Total Number of Instances             8124     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 1         0.031      0.972     1         0.986      0.985    e
+                 0.969     0          1         0.969     0.984      0.985    p
+Weighted Avg.    0.985     0.016      0.986     0.985     0.985      0.985
+
+=== Confusion Matrix ===
+
+    a    b   <-- classified as
+ 4208    0 |    a = e
+  120 3796 |    b = p
+
