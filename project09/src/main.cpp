@@ -625,13 +625,13 @@ user update_score(user one, user two)
   	
 		if (it!=two.numItems) // if can find the same track, add 1 to similarity
 			{
-				cout<<"find same item"<<endl; 
+				//cout<<"find same item"<<endl; 
 				confidence =1.0;
 				is = it;
 			}
 		else if (item_one.type!="genre" && item_one.type!="artist")// otherwise, try to find some similar track in user two's items
 			{
-				cout<<"track or album: no same item found"<<endl;				
+				//cout<<"track or album: no same item found"<<endl;				
 				for(iy=0;iy!=two.numItems;iy++)
 				{
 					item_two = get_item_type(two.items[iy].id);			
@@ -648,7 +648,7 @@ user update_score(user one, user two)
 			}
 			else
 				{
-					cout<<"genre and artist"<<endl;
+					//cout<<"genre and artist"<<endl;
 					is = -1;
 				}
 		if (one.items[ix].score<0 && is>=0)
@@ -704,7 +704,8 @@ int main(int argc, char *argv[])
       for(it=0;it!=users_validation[ix].numItems;it++)
       {
       	SaveFile<<users_validation[ix].items[it].id<<"\t"<<users_validation[ix].items[it].score;
-      	SaveFile<<"\t(ideal_score: "<<users_validation[ix].items[it].ideal_score<<")"<<endl;
+      	SaveFile<<"\t(ideal_score: "<<users_validation[ix].items[it].ideal_score<<")(";
+        SaveFile<<"confidence: "<<users_validation[ix].items[it].confidence<<")"<<endl;
       	
       }     
 	  }

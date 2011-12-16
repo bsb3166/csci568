@@ -1,0 +1,5 @@
+0|4
+540429	100	(ideal_score: 70)
+554898	50	(ideal_score: 90)
+470288	-1	(ideal_score: 70)
+163101	90	(ideal_score: 70)
