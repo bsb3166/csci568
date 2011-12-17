@@ -1,0 +1,21 @@
+Author: Chong Ding
+
+Compile:
+make
+
+Clean:
+make clean
+
+Run:
+./kdd
+
+Results:
+results are stored in the /project09/result/validation_predicted_results.txt
+
+Explaination of result:
+Similar format of the validationIdx1.firstLines.txt. Show both the predicted score with confidence and ideal score. 
+
+If the predicted score is negtive value (-1), it means program didn't predict this sepecific item currently. It can be done by compare it with the second most matching user in training dataset. Rightnew, I just compare the user with the most matching user in training data set to predict score. If the second most matching user doesn't help predict decent score, it can goes to the third most matching user, so on and so forth. But runtime will increase, so I didn't let my program do this right now.
+
+Runtime:
+Runtime is about 100 mins for the validation data set. you can stop the program at anytime to see the partial result.

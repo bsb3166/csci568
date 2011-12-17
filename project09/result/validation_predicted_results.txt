@@ -1,5 +1,15 @@
 0|4
-540429	100	(ideal_score: 70)
-554898	50	(ideal_score: 90)
-470288	-1	(ideal_score: 70)
-163101	90	(ideal_score: 70)
+540429	-1	(ideal_score: 70)(confidence: 0)
+554898	0	(ideal_score: 90)(confidence: 0.344828)
+470288	-1	(ideal_score: 70)(confidence: 0)
+163101	-1	(ideal_score: 70)(confidence: 0)
+1|4
+607946	-1	(ideal_score: 90)(confidence: 0)
+608376	90	(ideal_score: 90)(confidence: 1)
+609785	-1	(ideal_score: 90)(confidence: 0)
+612520	-1	(ideal_score: 90)(confidence: 0)
+2|4
+435836	-1	(ideal_score: 0)(confidence: 0)
+475026	-1	(ideal_score: 0)(confidence: 0)
+513664	-1	(ideal_score: 0)(confidence: 0)
+514926	-1	(ideal_score: 0)(confidence: 0)

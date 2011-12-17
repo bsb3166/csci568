@@ -185,6 +185,7 @@ void read_input(string dir)
     while(!OpenFile.eof())
       { 
       	tokens.clear();
+      	single_user.items.clear(); 
       	getline(OpenFile,line);     	
       	if(line.size()!=0) {   
       		if(line.find('|')) {
@@ -231,6 +232,7 @@ void read_validationUser(string dir)
     while(!OpenFile.eof())
       { 
       	tokens.clear();
+      	single_user.items.clear(); 
       	getline(OpenFile,line);     	
       	if(line.size()!=0) {   
       		if(line.find('|')) {
@@ -239,15 +241,25 @@ void read_validationUser(string dir)
         	  single_user.numItems = atoi(tokens[1].c_str()); 
         	  item single_item; 
         	  for (ix=0;ix!=single_user.numItems;ix++) {
-        	  	tokens.clear();
+        	  	tokens.clear();        	  	
         	  	getline(OpenFile,line);     			
           	  StringSplit(line, tokens,"\t");
           	  single_item.id = tokens[0];
+          	  //cout<<tokens[0]<<endl; 
           	  single_item.ideal_score = atoi(tokens[1].c_str());
           	  single_item.score = -1; // score needs to be predicted
-          	  single_item.confidence = 0.0; // confidence is 0 when initialized         	  
+          	  single_item.confidence = 0.0; // confidence is 0 when initialized    
+          	  //cout<<single_item.id<<endl;  	  
           	  single_user.items.push_back(single_item); 
         	  }
+        	  
+        	  //cout<<single_user.id<<"|"<<single_user.numItems<<endl;
+        	  //cout<<single_user.items[0].id<<endl;  
+        	  //cout<<single_user.items[1].id<<endl;  
+        	  //cout<<single_user.items[2].id<<endl;  
+        	  //cout<<single_user.items[3].id<<endl;  
+        	  //cout<<endl; 
+        	  
         	  // don't sort them because you want to print with the samw order with the input file
         	  //sort(single_user.items.begin(),single_user.items.end(),increment_item);
         	  users_validation.push_back(single_user);  
@@ -278,6 +290,7 @@ void read_testUser(string dir)
     while(!OpenFile.eof())
       { 
       	tokens.clear();
+      	single_user.items.clear(); 
       	getline(OpenFile,line);     	
       	if(line.size()!=0) {   
       		if(line.find('|')) {
@@ -672,11 +685,13 @@ int main(int argc, char *argv[])
           cout<<dir<<endl;
 	  read_input(dir);
 	  read_validationUser(dir);
+	  
 	  read_testUser(dir);
 	  //cout<<similarity_track(tracks[0],tracks[51])<<endl;
 	  
 	  //cout<<"validation starts"<<endl;
 	  //cout<<similarity_user_p(users_validation[0],users[0])<<endl;
+
     
 
 	  ofstream SaveFile("../result/validation_predicted_results.txt");
@@ -700,12 +715,17 @@ int main(int argc, char *argv[])
       
       users_validation[ix] = update_score(users_validation[ix],users[is]);
       
+
+      
       SaveFile<<users_validation[ix].id<<"|"<<users_validation[ix].numItems<<endl;
       for(it=0;it!=users_validation[ix].numItems;it++)
       {
       	SaveFile<<users_validation[ix].items[it].id<<"\t"<<users_validation[ix].items[it].score;
       	SaveFile<<"\t(ideal_score: "<<users_validation[ix].items[it].ideal_score<<")(";
         SaveFile<<"confidence: "<<users_validation[ix].items[it].confidence<<")"<<endl;
+      	cout<<users_validation[ix].items[it].id<<"\t"<<users_validation[ix].items[it].score;
+      	cout<<"\t(ideal_score: "<<users_validation[ix].items[it].ideal_score<<")(";
+        cout<<"confidence: "<<users_validation[ix].items[it].confidence<<")"<<endl;        
       	
       }     
 	  }
