@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head> 
+<title>Knowledge I</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection" />
+<link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print" />
+<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" /> 
+<!--[if IE]>
+  <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
+<![endif]-->
+</head>
+<body>
+<div class="container">
+  <h1><a href="http://mines.humanoriented.com/classes/2011/fall/csci568/portfolio/04.html">Project 1: Create Your Accounts</a></h1>
+  <h2>Mining Similarity using Euclidean Distance, Pearson Correlation</h2>
+  <p class="introduction">Prove your comprehension of fundamental similarity metrics by implementing them in the programming language of your choice. Warm up your programming chops before diving into subsequent projects.</br>
+  </p>
+  <h3>1. Represent similarity between data objects to a machine</h3>
+  <p>Similarity between data objects can be used to build systems, such as recommendation systems. For instances, to build a system for recommending items, we can score the items by producing a weighted score that ranks the critics; to build a system for matching products, we can determine similariy by looking at what other items the users are interested in except a given item.
+  </p>
+  <h3>2. Euclidean distance, Pearson coefficient, Jaccard/Tanimoto, and Cosine similarity</h3>
+  <p>Euclidean distance is the ordinary distance between two points. Euclidean similarity score calculates the distance of data objects when placing the ranked objects on a chart. It works for most cases that calculate similarity scores in very simple ways.
+  </p>
+  <p>Pearson coefficient between two data objects that have binary or continuous variables is a measure of the linear relationship between the attributes of the objects. It measures how well two sets of data fit on a straight line, so it works better than Euclidean distance similarity when the data is not well normolized. 
+  </p>
+  <p>Jaccard coefficient calculates the number of matching presences over the number of atributes not involved in 00 matches. It is frequently used to handle objects consisting of asymmetric binary attributes.
+  </p>
+  <p>Cosine similarity calculates the vector dot product of two items over the length product of the two items. It is one of the most common measure of document similarities which work on document vectors.
+  </p>
+  <p>main.rb
+  </p>  
+  <pre class="code">
+#!/usr/bin/env ruby
+
+require_relative 'movies'
+require_relative 'movie_utils'
+
+ratingset = generate_ratingset(PEOPLE, MOVIES, POSSIBLE_RATINGS)
+
+print_ratings(ratingset)
+
+johns_ratings = generate_ratingset(['john'], MOVIES, POSSIBLE_RATINGS)
+
+print_ratings(johns_ratings)
+
+ratingset.each do |key, value|
+  puts "#{key}: #{similarity(value, johns_ratings['john'])}"
+end
+
+#puts similarity(subject, target_half)
+
+  </pre>
+  <p>movie_utils.rb
+  </p>  
+  <pre class="code">
+def print_ratings(ratingset)
+  ratingset.each do |person, ratings|
+    puts person
+    ratings.each do |flick, rating|
+      puts "\t#{rating} #{flick}"
+    end
+  end
+end
+
+def generate_ratingset(people, movies, possible_ratings)
+  {}.tap do |ratingset|
+    people.each do |person|
+      ratingset[person] = {}.tap do |ratings|
+        movies.sort_by{ rand }.slice(0..VIEWINGS).each do |flick|
+          ratings[flick] = possible_ratings[rand(possible_ratings.size)]
+        end
+      end
+    end
+  end
+end
+
+def similarity(subject, other)
+  common_film_names = subject.keys & other.keys
+  if common_film_names.empty?
+    return 0
+  end
+  similarity = 0
+  common_film_names.each do |film_name|
+    subject_rating = subject[film_name]
+    other_rating = other[film_name]
+    difference_squared = (subject_rating - other_rating)**2
+    similarity += difference_squared
+  end
+  return 1 / (1 + Math.sqrt(similarity))
+end
+
+
+  </pre>
+  <p>movies.rb
+  </p>  
+  <pre class="code">
+VIEWINGS = 20
+
+MOVIES = [ "Nightmare on Elm Street",
+           "Dreamcatcher",
+           "Hush Sweet Charlotte",
+           "Oliver Twist",
+           "Olsen Twins",
+           "Muppets Take Manhattan",
+           "Sex and the City",
+           "Revolutionary Road",
+           "Source Code",
+           "The Matrix",
+           "Hackers",
+           "Titanic",
+           "The Bounty Hunter",
+           "Valkyrie",
+           "Jarhead",
+           "Apocalypse Now",
+           "Taxi Driver",
+           "Midnight in Paris",
+           "Black Swan",
+           "Friday"
+         ]
+
+POSSIBLE_RATINGS = (1..4).to_a
+
+PEOPLE = %w( joe mitchell trevor breian taylor brandon jared levente marc
+             yong michael jerry matt alec josh chong david oliver dan amanreet )
+
+  </pre>    
+</div>
+</body>
+</html>

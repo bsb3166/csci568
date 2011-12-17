@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head> 
+<title>Knowledge II</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection" />
+<link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print" />
+<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" /> 
+<!--[if IE]>
+  <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
+<![endif]-->
+</head>
+<body>
+<div class="container">
+  <h1><a href="http://mines.humanoriented.com/classes/2011/fall/csci568/portfolio/05.html">Clustering</a></h1>
+  <h2>Mining for Groups Using Clustering Algorithms</h2>
+  <p class="introduction">Prove your comprehension of classic clustering algorithms by implementing one in the programming language of your choice.</br>
+  </p>
+  <h3>1 Represent groups of similar data objects to a machine</h3>
+  <p>Data objects can be grouped into clusters based only on information found in the data that describes the objects and their relationships. The goal of clustering is to let objects with in a group be similar or related to one another, while different from or unrelated to the objects in other groups. The similarity with in the same group and the difference between groups represent the clustering performance.
+  </p>
+  <h3>2 Hierarchical and K-Means clustering</h3>
+  <p>Hierarchical clustering is a set of nested clusters that are organized as a tree which permits clusters to have subclusters. It builds up a hierarch of groups by continuously merging the two most similar groups, with each group starts as a single item. The distances between every pair of groups are calculated in each iteration, and the closest ones are merged together to form a new group. The iterations repeated until there is only one group. Each cluster in a hierarchical clustering tree is either a point in the tree with two branches, or an endpoint associated with an actual row from the dataset. Each cluster also contains data about its location, which is either the row data for the endpoints or the merged data from its two branches for other node types.
+  </p>
+  <p>K-Means clustering defines a prototype in terms of a centroid, which is usually the mean of a group of points, and is typically applied to objects in a continuous n-dimensional space. It begins with k randonly placed centroids, and assigns every item to the nearest one. After each iteration, the centroids are moved to the average location of all the nodes assigned to them. The iterations repeat until the assignmnets stop changing. The number of iterations it takes to produce the final result is quite small compared to hierarchical clustering. However, because K-Means clustering usually uses random centroids to start with, the order of the results returned will almost be different. It is also possible for the contents of the clusters to be different depending on the initial locations of the centroids.
+  </p>
+  <p>The foremost diference between Hierarchical and K-Means clustering is that K-Means clustering is partitional clustering, which not allows subclusters, and each point should be in only one cluster. Further, the hierarchical clustering tree does not really break the data into distinct groups without computationally intensive work, since the relationship between every pair of items must be calculated and then recalculated whem items are merged. Thus in lage dataset, K-Means clustering run much faster than Hierarchical clustering.
+  </p>
+  <p>dbscan.cpp
+  </p>
+  <pre class="code">
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include <iostream>
+#define MaxDimension 10
+#define MaxNum 1000
+#define MaxLen 100
+
+using namespace std;
+
+int main()
+{
+	FILE *fp, *fp_setup;
+	fp=fopen("iris.csv","r");
+	fp_setup=fopen("setup.txt","r"); 
+	int MinPts;
+	double Eps;
+	int Dimension;
+	int Num;
+	int i,j,k;
+	char temp;
+	fscanf(fp_setup,"%d %lf %d %d",&MinPts,&Eps,&Dimension,&Num);
+	fclose(fp_setup);
+	double Data[MaxNum][MaxDimension]; 
+	char   iris_class[MaxNum][MaxLen];
+	double distance[MaxNum][MaxDimension]; 
+	//read data
+	for(i=0;i&ltNum;i++) {		
+		for(j=0;j&ltDimension;j++) {
+			fscanf(fp,"%lf%c",&Data[i][j],&temp);
+			cout&lt&ltData[i][j]&lt&lttemp;
+		}	
+	  fscanf(fp,"%s",&iris_class[i]);
+	  cout&lt&ltiris_class[i]&lt&ltendl;
+	}  	
+	fclose(fp);
+
+
+	//label all the points. iscore = true: core point; iscore = false: not core point
+	int *label = (int *)malloc(sizeof(int)*Num);
+	double *IsCore = (double *)malloc(sizeof(double)*Num);
+
+	for(i=0;i&ltNum;i++)
+	{
+		label[i] = -1;
+		IsCore[i] = false;
+	}
+
+	//calculate the distance between two points
+	for(i=0;i&ltNum;i++)
+	{
+		for(j=0;j&ltNum;j++)
+		{
+			distance[i][j]=0;
+			for(k=0;k&ltDimension;k++)
+				distance[i][j] += (Data[i][k]-Data[j][k])*(Data[i][k]-Data[j][k]);
+			distance[i][j] = sqrt(distance[i][j]);
+		}
+	}
+
+	//find out core point and the points belong to this core point
+	for(i=0;i&ltNum;i++)
+	{
+		int count=0;
+
+		for(j=0;j&ltNum;j++)
+		{
+			if(label[j]==-1)
+			{
+				if(distance[i][j]&ltEps)label[j]=i;
+				count++;
+			}
+		}
+
+		if(count&gt=MinPts)
+			IsCore[i] = true;
+		else 
+		{
+			for(j=0;j&ltNum;j++)
+			{
+				if(label[j] == i)
+					label[j] = -1;
+			}
+		}
+	}
+	
+
+	//Scan the remainning points.
+	for(i=0;i&ltNum;i++)
+	{
+		if(label[i]==-1)
+		{
+			double dis=99999.9;
+			
+			for(j=0;j&ltNum;j++)
+			{
+				if(IsCore[j])
+				{
+					if(distance[i][j]&ltdis)
+					{
+						dis = distance[i][j];
+						label[i]=j;
+					}
+				}
+			}
+		}
+	}
+
+	//print out
+	fp = fopen("result.txt","w");
+	for(i=0;i&ltNum;i++)
+		if(IsCore[i])
+		{
+			int n=0;
+			fprintf(fp,"core points(");
+			for(k=0;k&ltDimension;k++)
+				fprintf(fp,"%lf ",Data[i][k]);
+			fprintf(fp,")object: \n");
+			for(j=0;j&ltNum;j++)
+			{
+				if(label[j]==i)
+				{
+					n++;
+					for(k=0;k&ltDimension;k++)
+						fprintf(fp,"%lf ",Data[j][k]);
+					fprintf(fp,"\n");
+				}
+			}
+			fprintf(fp,"total: %d\n",n);
+		}
+
+	return 0;
+
+}
+
+  </pre>
+</div>
+</body>
+</html>

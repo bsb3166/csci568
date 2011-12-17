@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head> 
+<title>Knowledge III</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection" />
+<link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print" />
+<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" /> 
+<!--[if IE]>
+  <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
+<![endif]-->
+</head>
+<body>
+<div class="container">
+  <h1><a href="http://mines.humanoriented.com/classes/2010/fall/csci568/portfolio/final.html">Knowledge III</a></h1>
+  <h2>Artificial Neural Network</h2>
+  <p class="introduction"><ul>
+  <li>Demonstrate your understanding of the feed-forward ANN model</li>
+  <li>Think about and implement the necessary API needed to use an ANN programatically</li>
+  <li>Demonstrate your understanding of backpropogation algorithm through implementation</li>
+</ul></br>
+  </p>
+  <h3>1 Multilayer ANN</h3>
+  <p>A multilayer artificial neural network may contain several intermediary layers between its input and output layers. Such intermediary layers are called hidden layers and the nodes embedded in these layers are called hidden nodes. In a feed-forward neural network, the nodes in one layer are connected only to the nodes in the next layer. In a recurrent neural network, the links may connect nodes within the same layer or nodes from one layer to the previous layers. The goal of the ANN learning algorithm is to determine a set of weights w that minimize the total sum of squared errors. ANN can handle redundant features because the weights are automatically learned during the training step. However, training an ANN is a time consuming process, especially when the number of hidden nodes is large.
+  </p>
+  <h3>2 Backpropagation</h3>
+  <p>Backpropagation algorithm moves backward through the network adjusting the weights of the links between the nodes to better reflect what the network is being told is the right answer. For each node in the output layer: calculate the difference between the node's current output and what is should be; determine how much the node's total input has to change; change the strength of every incoming link in proportion to the link's current strength and the learning rate. For each node in the hidden layer: change the output of the node by the sum of the strength of each output link multiplied by how much its target node has to change; determine how much the node's total input has to change; change the strength of every input link in proportion to the link's current strength and the learning rate.
+  </p>
+  <p>main.rb
+  </p>  
+  <pre class="code">
+require_relative 'ann'
+layers = [3,2,3]
+inputs = [1.0, 0.25, -0.5]
+ideal_outputs = [1.0, -1.0, 0.0]
+ann = Ann.new(layers)
+ann.train(inputs, ideal_outputs)  	
+  </pre>  
+  <p>ann.rb
+  </p>  
+  <pre class="code">
+class Ann
+  attr_reader :input, :output, :hidden_output, :ideal_output, :layers
+
+    def initialize(number_of_layers)
+      # initialze arrays
+      @N = 0.1
+      @layers = Array.new
+      @input = Array.new
+      @current_output = Array.new
+      @hidden_output = Array.new
+	  number_of_layers.each_index do |i|
+		layer = Layer.new
+		(0...number_of_layers[i]).each do |n|
+			if i != number_of_layers.size() - 1
+				layer.add_neuron(Neuron.new(number_of_layers[i+1]))
+			else
+				layer.add_neuron(Neuron.new(0))
+			end
+		end
+		@layers.push(layer)
+	  end	  
+	end
+		
+	def forward_phase
+		@hidden_output = Array.new(layers[1].neurons.size(), 0.0)
+		@hidden_output.each_index do |k|
+			@converged_output = Array.new(layers[1].neurons.size, 0.0)
+			total = 0.0
+			@input.each_index do |i|
+				total += @input[i] * layers[0].neurons[i].weights[k]
+			end
+			@hidden_output[k] = total
+		end
+		@current_output = Array.new(@ideal_output.size, 0.0)
+		@current_output.each_index do |j|
+			total = 0.0
+			@hidden_output.each_index do |k|
+				total += @hidden_output[k] * layers[1].neurons[k].weights[j]
+			end
+			@current_output[j] = total
+		end
+		@current_output
+	end
+
+	# backward_phase of backpropogation
+	def backward_phase
+		deltas_of_output = Array.new(@current_output.size, 0.0)
+		
+		@current_output.each_index do |i|
+		  error = @ideal_output[i] - @current_output[i]
+		  deltas_of_output[i] = dtanh(@current_output[i]) * error
+		end
+		
+		deltas_of_hidden_layers = Array.new(@hidden_output.size, 0.0)
+
+		deltas_of_hidden_layers.each_index do |k|
+		  error = 0.0
+		  deltas_of_output.each_index do |j|
+			error += deltas_of_output[j] * layers[1].neurons[k].weights[j]
+		  end
+			deltas_of_hidden_layers[k] = dtanh(@hidden_output[k]) * error
+		end
+
+		@hidden_output.each_index do |k|
+			@current_output.each_index do |j|
+				diff = deltas_of_output[j] * @hidden_output[k]
+				layers[1].neurons[k].weights[j] += diff * @N
+			end
+		end
+
+		@input.each_index do |i|
+		  @hidden_output.each_index do |j|
+			diff = deltas_of_hidden_layers[j] * @input[i]
+			layers[0].neurons[i].weights[j] += diff * @N
+		  end
+		end
+	end
+
+	def train(input, output)
+      @input = input	
+	  @ideal_output = output		
+	  converged_output = @input
+	  err0 = 1
+	  err1 = 1
+	  err2 = 1
+	  while err0 > 0.00000000001 and err1 > 0.00000000001 and err2 > 0.00000000001
+          converged_output = forward_phase
+		  backward_phase
+          err0 = (@ideal_output[0] - @current_output[0]).abs
+		  err1 = (@ideal_output[1] - @current_output[1]).abs
+		  err2 = (@ideal_output[2] - @current_output[2]).abs
+	  end
+      puts "Converged Output:"
+	  puts "Output[0]: " + converged_output[0].to_s
+	  puts "Output[1]: " + converged_output[1].to_s
+	  puts "Output[2]: " + converged_output[2].to_s
+	end
+
+	def dtanh(y)
+		1.0
+	end	
+
+end
+
+class Neuron
+	attr_accessor :weights
+	def initialize(numWeights)
+		@weights = Array.new(numWeights)
+		@weights.each_index do |i|
+			@weights[i] = -1 + rand(100)/50.0
+		end
+	end
+end
+
+class Layer
+	attr_accessor :neurons
+	def initialize
+	  @neurons = Array.new
+	end
+
+	def add_neuron(neuron)
+	  @neurons.push(neuron)
+	end
+
+end
+
+  </pre>
+</div>
+</body>
+</html>
